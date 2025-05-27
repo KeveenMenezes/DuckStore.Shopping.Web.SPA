@@ -12,6 +12,7 @@ import {
   MatSelectionList,
   MatSelectionListChange,
 } from '@angular/material/list';
+import { ShopParams } from '../../shared/models/shopParams';
 
 @Component({
   selector: 'app-shop',
@@ -35,9 +36,9 @@ export class ShopComponent implements OnInit {
   pageIndex = 1;
   pageSize = 10;
   products: Product[] = [];
-  selectedBrands: string[] = [];
-  selectedTypes: string[] = [];
-  selectedSort: string = 'name';
+
+  shopParams = new ShopParams ();
+
   sortOptions = [
     { name: 'Alphabetical', value: 'name' },
     { name: 'Price: Low-High', value: 'priceAsc' },
@@ -56,31 +57,17 @@ export class ShopComponent implements OnInit {
 
   getProducts() {
     this.catalogService
-      .getProducts(this.selectedBrands, this.selectedTypes, this.selectedSort)
+      .getProducts(this.shopParams)
       .subscribe({
         next: (response) => (this.products = response.items),
         error: (error) => console.error(error),
       });
   }
 
-  //TODO: verificar se este metodo esta sendo usado.
-  getProductsPagination() {
-    this.catalogService
-      .getProductPagination(this.pageIndex, this.pageSize)
-      .subscribe({
-        next: (response) => {
-          this.products = response.items;
-        },
-        error: (error: any) => {
-          console.log(error);
-        },
-      });
-  }
-
   onShortChange(event: MatSelectionListChange) {
     const selectedOption = event.options[0];
     if (selectedOption) {
-      this.selectedSort = selectedOption.value;
+      this.shopParams.sort = selectedOption.value;
       this.getProducts();
     }
   }
@@ -89,16 +76,16 @@ export class ShopComponent implements OnInit {
     const dialogRef = this.matDialogService.open(FiltersDialogComponent, {
       minWidth: '500px',
       data: {
-        selectedBrands: this.selectedBrands,
-        selectedTypes: this.selectedTypes,
+        selectedBrands: this.shopParams.brands,
+        selectedTypes: this.shopParams.types,
       },
     });
     dialogRef.afterClosed().subscribe({
       next: (result) => {
         if (result) {
           console.log(result);
-          this.selectedBrands = result.selectedBrands;
-          this.selectedTypes = result.selectedTypes;
+          this.shopParams.brands = result.selectedBrands;
+          this.shopParams.types = result.selectedTypes;
           this.getProducts();
         }
       },
