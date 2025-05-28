@@ -6,14 +6,6 @@
 @include mat.core();
 
 html {
-  color-scheme: light dark;
-  @include mat.theme(
-    (
-      color: mat.$cyan-palette,
-      density: 0,
-    )
-  );
-
   @include mat.badge-overrides(
     (
       background-color: var(--mat-sys-primary),
@@ -34,7 +26,7 @@ body {
   height: 100%;
 
   .text-primary {
-    color: #7d00fa;
+    color: #005cbb;
   }
 }
 

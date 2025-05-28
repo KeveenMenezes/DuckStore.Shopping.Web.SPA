@@ -22,6 +22,7 @@ export class CatalogService {
         ...(shopParams.sort ? { sort: shopParams.sort } : {}),
         ...(shopParams.pageSize ? { pageSize: shopParams.pageSize} : {}),
         ...(shopParams.pageNumber ? { pageNumber: shopParams.pageNumber} : {}),
+        ...(shopParams.search ? { search: shopParams.search} : {}),
       },
     });
 
