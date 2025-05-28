@@ -20,7 +20,8 @@ export class CatalogService {
         ...(shopParams.brands?.length ? { brands: shopParams.brands.join(',') } : {}),
         ...(shopParams.types?.length ? { types: shopParams.types.join(',') } : {}),
         ...(shopParams.sort ? { sort: shopParams.sort } : {}),
-        pageSize: 20,
+        ...(shopParams.pageSize ? { pageSize: shopParams.pageSize} : {}),
+        ...(shopParams.pageNumber ? { pageNumber: shopParams.pageNumber} : {}),
       },
     });
 
