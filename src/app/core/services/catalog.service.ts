@@ -31,10 +31,14 @@ export class CatalogService {
     });
   }
 
+  getProduct(id: number) {
+    return this.http.get<Product>(`${this.baseUrl}products/${id}`);
+  }
+
   getBrands() {
     if (this.brands.length > 0) return;
 
-    return this.http.get<string[]>(`${this.baseUrl}/brands`).subscribe({
+    return this.http.get<string[]>(`${this.baseUrl}brands`).subscribe({
       next: (response) => (this.brands = response),
     });
   }
@@ -42,7 +46,7 @@ export class CatalogService {
   getTypes() {
     if (this.types.length > 0) return;
 
-    return this.http.get<string[]>(`${this.baseUrl}/types`).subscribe({
+    return this.http.get<string[]>(`${this.baseUrl}types`).subscribe({
       next: (response) => (this.types = response),
     });
   }
