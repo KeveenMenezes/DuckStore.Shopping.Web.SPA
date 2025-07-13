@@ -42,7 +42,7 @@
       </div>
   </div>
   <div class="grid grid-cols-5 gap-4">
-    @for(product of productsPagination?.items; track product.id) {
+    @for(product of productsPagination.items; track product.id) {
       <app-product-item [product]="product"></app-product-item>
     }
   </div>

@@ -1,7 +1,5 @@
-import { HttpErrorResponse } from '@angular/common/module.d-CnjH8Dlt';
 import { Component } from '@angular/core';
 import { MatCard } from '@angular/material/card';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-server-error',
