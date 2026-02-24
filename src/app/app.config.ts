@@ -22,6 +22,8 @@ export const appConfig: ApplicationConfig = {
         clientId: environment.cognito.clientId,
         scope: environment.cognito.scope,
         responseType: 'code',
+        silentRenew: true,
+        useRefreshToken: true,
       },
     }),
   ],
